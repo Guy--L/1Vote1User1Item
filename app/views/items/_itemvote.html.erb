@@ -1,0 +1,18 @@
+<li id="<%= dom_id(item)+voted_for.to_s %>" 
+    <%# newitems from external api (after save and broadcast) need user id to vote %>
+    <%= "data-user-target=newitem" if local_assigns[:needsuser] %>
+    class="list-group-item d-flex justify-content-between align-items-start border-0">
+    <div class="ms-2 me-auto">
+        <div class="fw-bold"><a href='<%= item.url %>' class='nav-link'><%= item.title %></a></div>
+        <small>
+            <%= item.cached_votes_total > 0 ? pluralize(item.cached_votes_total, 'vote') : '' %>
+            by <%= item.by %>
+            <%= time_ago_in_words item.item_created_at %> ago | 
+            <%= button_to voted_for ? 'rescind your vote' : 'apply your vote', 
+                vote_item_path(item), method: :patch,
+                class: 'btn btn-link btn-small nav-link btn-inline' %>
+            <%= item.cached_votes_total == 0 ? '' : '|' %>
+            <em><%= item.voter_names %></em>
+        </small>
+    </div>
+</li>

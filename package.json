@@ -1,0 +1,7 @@
+{
+  "name": "topnews",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+  }
+}

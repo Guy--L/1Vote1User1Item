@@ -1,0 +1,3 @@
+<%= turbo_frame_tag dom_id(item)+'000' do %>
+    <%= render partial: "items/itemvote", locals: { item: item, voted_for: false, needsuser: true } %>
+<% end %>
