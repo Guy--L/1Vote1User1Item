@@ -27,12 +27,8 @@ class ItemsController < ApplicationController
       @item.liked_by current_user
     end
 
-    @item.broadcast_replace_to "items", partial: "items/itemvote", locals: { item: @item, voted_for: true }, target: dom_id(@item)+'true'
-    @item.broadcast_replace_to "items", partial: "items/itemvote", locals: { item: @item, voted_for: false }, target: dom_id(@item)+'false'
-    
-    respond_to do |format|
-      format.html {}
-    end
+    @item.broadcast_replace_to "items", partial: "items/itemvote", locals: { item: @item }, target: dom_id(@item)
+    head :no_content
   end
 
   def refeed
