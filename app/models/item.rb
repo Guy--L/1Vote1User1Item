@@ -13,7 +13,7 @@ class Item < ApplicationRecord
     after_create_commit :broadcast_update
 
     def broadcast_update
-      broadcast_prepend_to "items",
+      broadcast_prepend_later_to "items",
         target: "items_list", 
         partial: "items/itemnew", 
         locals: { item: self }
