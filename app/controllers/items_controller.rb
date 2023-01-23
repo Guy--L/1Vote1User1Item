@@ -5,15 +5,9 @@ class ItemsController < ApplicationController
     @sort = params[:sort].to_i
 
     if @sort == 1
-      @pagy, @items = pagy(Item.all.order(cached_votes_total: :desc))
-      #  do |item|
-      #     render turbo_stream: turbo_stream.prepend("items", target: "items_list", partial: "items/itemnew", locals: {item: item})
-      # end
+      @pagy, @items = pagy(Item.all.order(cached_votes_total: :desc, id: :desc))
     else
       @pagy, @items = pagy(Item.all.order(id: :desc))
-      # do |item|
-      #   render turbo_stream: turbo_stream.prepend("items", target: "items_list", partial: "items/itemnew", locals: {item: item})
-      # end
     end
     @sort = 1 - @sort
   end

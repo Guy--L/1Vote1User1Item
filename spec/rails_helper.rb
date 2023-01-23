@@ -89,6 +89,33 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include ActiveSupport::Testing::TimeHelpers
+
+  # Capybara.register_driver :headless_chrome do |app|
+  #   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+  #       chromeOptions: { args: %w[--headless --disable-gpu] },
+  #       'goog:loggingPrefs': {
+  #           browser: 'ALL',
+  #           driver: 'ALL'
+  #       }
+  #     )
+  
+  #   options = ::Selenium::WebDriver::Chrome::Options.new
+  
+  #   options.add_argument('--headless')
+  #   options.add_argument('--no-sandbox')
+  #   options.add_argument('--window-size=1400,1400')
+  #   options.add_argument('--enable-logging')
+  
+  #   Capybara::Selenium::Driver.new(
+  #       app,
+  #       browser: :chrome,
+  #       capabilities: capabilities,
+  #       options: options
+  #     )
+  # end
+  
+  # Capybara.default_driver = :headless_chrome
+  # Capybara.javascript_driver = :headless_chrome
 end
 
 def json_file(file_name)

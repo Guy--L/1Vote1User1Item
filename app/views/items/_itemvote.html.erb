@@ -1,21 +1,19 @@
-<li id="<%= dom_id(item) %>" 
+<li id="<%= dom_id(item) %>" data-item="<%= item.order_id(@sort) %>" 
     <%# newitems from external api (after save and broadcast) need user id to vote %>
-    <%= "data-user-target=newitem" if local_assigns[:needsuser] %>
+    <%= "data-user-target=newitem" if local_assigns[:isnew] %>
     data-user-target="voteitem"
-    <% if !item.voter_ids.nil? %>
-        data-voters="<%= item.voter_ids %>"
-    <% end %>
+    data-voters="<%= item.voter_ids %>"
     class="list-group-item d-flex justify-content-between align-items-start border-0">
     <div class="ms-2 me-auto">
         <div class="fw-bold"><a href='<%= item.url %>' class='nav-link'><%= item.title %></a></div>
         <small>
-            <%= item.cached_votes_total > 0 ? pluralize(item.cached_votes_total, 'vote') : '' %>
+            <%= item.tally %>
             by <%= item.by %>
             <%= time_ago_in_words item.item_created_at %> ago | 
             <%= button_to 'apply your vote', 
                 vote_item_path(item), method: :patch,
                 class: 'btn btn-link btn-small nav-link btn-inline' %>
-            <%= item.cached_votes_total == 0 ? '' : '|' %>
+            <%= item.vote_count == 0 ? '' : '|' %>
             <em><%= item.voter_names %></em>
         </small>
     </div>

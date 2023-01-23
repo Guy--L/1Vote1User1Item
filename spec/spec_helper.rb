@@ -96,4 +96,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 config.default_formatter = "doc"
+config.filter_run_when_matching focus: true
 end

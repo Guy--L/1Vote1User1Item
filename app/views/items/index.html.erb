@@ -1,8 +1,15 @@
   <%= turbo_stream_from "items" %>
   <%= turbo_frame_tag "items" do %>
     <%# setup client side controller on parent to label newitems with user id after broadcast %>
-    <ul id="items_list" class="list-group" data-user='<%= Current.user.id %>' data-controller='user'>
+    <ul id="items_list" class="list-group" 
+      data-user='<%= Current.user.id %>' 
+      data-controller='user' 
+      data-range='[<%= @items.first&.order_id(@sort).to_s+', '+@items.last&.order_id(@sort).to_s %>]'
+      data-page='<%= @pagy&.page %>'
+      data-sort='<%= @sort %>'>
+      
       <%= render @items %>
     </ul>
+    <br />
     <%== pagy_bootstrap_nav(@pagy) %>
   <% end %>

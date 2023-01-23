@@ -18,8 +18,10 @@ module Topnews
     # -- all .rb files in that directory are automatically loaded.
 
     config.after_initialize do
-      Rails.application.load_tasks # <---
-      Rake::Task['hacker_news:retrieve'].invoke
+      if(!Rails.env.test?)
+        Rails.application.load_tasks # <---
+        Rake::Task['hacker_news:retrieve'].invoke
+      end
     end
   end
 end

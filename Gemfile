@@ -38,6 +38,7 @@ group :test do
   gem "faker"
   gem "shoulda-matchers", "~> 4.5", ">= 4.5.1"
   gem "webmock"
+  gem "launchy"
 end
 
 group :development do
